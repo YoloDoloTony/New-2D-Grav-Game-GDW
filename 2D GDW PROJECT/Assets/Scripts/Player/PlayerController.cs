@@ -19,14 +19,11 @@ public class PlayerController : MonoBehaviour
     private float save;
     Vector2 currentPos;
 
-
-
     //Gravity Variables
     bool top;
     bool isGrounded;
     bool isVertical;
     bool isRight;
-
 
     void Start()
     {
@@ -53,13 +50,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("pressed shift");
             Dash();
         }
-
-
-
-
     }
-
-
 
     //Player Movement
     private void MovePlayer()
@@ -225,6 +216,11 @@ public class PlayerController : MonoBehaviour
         isVertical = vertical;
     }
 
+    public bool GetIsRight()
+    {
+        return isRight;
+    }
+
     public void SetIsRight(bool right)
     {
         isRight = right;
@@ -298,6 +294,4 @@ public class PlayerController : MonoBehaviour
     {
         currentPos = new Vector2(transform.position.x, transform.position.y);
     }
-
-
 }

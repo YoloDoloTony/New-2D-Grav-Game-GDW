@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Level\Bullet.cs" />
     <Compile Include="Assets\Scripts\Level\MovingBarrier.cs" />
+    <Compile Include="Assets\ground.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

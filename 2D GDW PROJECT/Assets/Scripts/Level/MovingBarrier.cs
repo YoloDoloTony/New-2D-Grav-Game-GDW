@@ -31,5 +31,7 @@ public class MovingBarrier : MonoBehaviour
         {
             transform.RotateAround(customPivotLeft.transform.position, Vector3.forward, rotationSpeed * Time.deltaTime);
         }
+
+        //caavin gole made this no public cooler
     }
 }

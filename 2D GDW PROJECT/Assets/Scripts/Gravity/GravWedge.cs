@@ -78,6 +78,6 @@ public class GravWedge : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         canSwap = true;
-        Debug.Log("time");
+        Debug.Log("Hi reyan");
     }
 }

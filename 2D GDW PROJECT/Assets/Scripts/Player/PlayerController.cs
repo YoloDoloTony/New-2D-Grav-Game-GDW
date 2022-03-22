@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private float save;
     Vector2 currentPos;
 
+    Animator animator;
+
     //Gravity Variables
     bool top;
     bool isGrounded;
@@ -29,6 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         save = delayTime;
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -69,8 +72,9 @@ public class PlayerController : MonoBehaviour
                 {
                     FaceDirection();
                 }
+                animator.SetBool("IsWalking",true);
             }
-            if (Input.GetKey(KeyCode.D))
+            else if (Input.GetKey(KeyCode.D))
             {
                 movementDir += new Vector2(1.0f, 0.0f);
 
@@ -78,6 +82,11 @@ public class PlayerController : MonoBehaviour
                 {
                     FaceDirection();
                 }
+                animator.SetBool("IsWalking", true);
+            }
+            else
+            {
+                animator.SetBool("IsWalking", false);
             }
         }
         //Vertical (right) player movement
@@ -91,8 +100,9 @@ public class PlayerController : MonoBehaviour
                 {
                     FaceDirection();
                 }
+                animator.SetBool("IsWalking", true);
             }
-            if (Input.GetKey(KeyCode.D))
+            else if (Input.GetKey(KeyCode.D))
             {
                 movementDir += new Vector2(0.0f, 1.0f);
 
@@ -100,6 +110,11 @@ public class PlayerController : MonoBehaviour
                 {
                     FaceDirection();
                 }
+                animator.SetBool("IsWalking", true);
+            }
+            else
+            {
+                animator.SetBool("IsWalking", false);
             }
         }
         //Vertical (left) player movement
@@ -114,7 +129,7 @@ public class PlayerController : MonoBehaviour
                     FaceDirection();
                 }
             }
-            if (Input.GetKey(KeyCode.D))
+            else if (Input.GetKey(KeyCode.D))
             {
                 movementDir += new Vector2(0.0f, -1.0f);
 
@@ -123,6 +138,7 @@ public class PlayerController : MonoBehaviour
                     FaceDirection();
                 }
             }
+
         }
         rb.velocity = movementDir * (playerSpeed);
     }
@@ -230,23 +246,6 @@ public class PlayerController : MonoBehaviour
     {
 
         Debug.Log("dash");
-
-        //rb.velocity = new Vector2(rb.velocity.x,0f);
-        //if (facingRight)
-        //{
-        //    rb.AddForce(transform.right * dashForce, ForceMode2D.Impulse);
-        //}
-        //if (!facingRight)
-        //{
-        //    rb.AddForce(transform.right * dashForce * -1, ForceMode2D.Impulse);
-        //}
-
-        //Adds to the player's transform
-
-
-
-
-
         currentPos += movementDir * dashForce;
         transform.position = currentPos;
         ResetTimer();
@@ -289,6 +288,7 @@ public class PlayerController : MonoBehaviour
             return Physics2D.Raycast(rb.transform.position, Vector2.right * -1, dashForce, ObjectLayer).collider == null;
         }
     }
+  
 
     private void updateScammerValue()
     {

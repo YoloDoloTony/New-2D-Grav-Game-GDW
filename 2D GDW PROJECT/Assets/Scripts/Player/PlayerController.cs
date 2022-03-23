@@ -46,12 +46,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             SwitchGravity();
+            animator.SetBool("IsFlip", true);
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift) && AbleToDash())
         {
             Debug.Log("pressed shift");
             Dash();
+           
         }
     }
 
@@ -204,6 +206,8 @@ public class PlayerController : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
         isGrounded = true;
+
+        animator.SetBool("IsFlip", false);
 
         if (collision.gameObject.CompareTag("platform"))
         {

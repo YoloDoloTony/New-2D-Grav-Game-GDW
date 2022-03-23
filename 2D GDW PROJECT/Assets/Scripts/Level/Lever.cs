@@ -8,6 +8,13 @@ public class Lever : MonoBehaviour
     bool canInteract;
     public GameObject doorObject;
 
+    SpriteRenderer SpriteRenderer;
+
+    private void Awake()
+    {
+        SpriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -15,6 +22,19 @@ public class Lever : MonoBehaviour
         {
             isToggled = !isToggled;
             doorObject.SetActive(isToggled);
+        }
+        if (isToggled)
+        {
+            SpriteRenderer.color = Color.green;
+        }
+        else
+        {
+            SpriteRenderer.color = Color.red;
+            //will change when we have anims
+        }
+        if (canInteract)
+        {
+            SpriteRenderer.color = Color.yellow;
         }
     }
 

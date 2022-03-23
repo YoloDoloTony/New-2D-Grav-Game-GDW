@@ -4,22 +4,17 @@ using UnityEngine;
 
 public class Lever : MonoBehaviour
 {
-
-    public bool isToggled = false;
-    bool canInteract = false;
+    public bool isToggled;
+    bool canInteract;
     public GameObject doorObject;
 
     // Update is called once per frame
     void Update()
     {
-        if (canInteract == true && isToggled == false && Input.GetKeyDown("e"))
+        if (canInteract && Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("Lever toggled");
-            isToggled = true;
-        }
-        if (isToggled == true)
-        {
-            doorObject.SetActive(false);
+            isToggled = !isToggled;
+            doorObject.SetActive(isToggled);
         }
     }
 
@@ -28,7 +23,6 @@ public class Lever : MonoBehaviour
         if (leverBox.CompareTag("Player"))
         {
             canInteract = true;
-            Debug.Log("Can toggle lever");
         }
     }
 
@@ -37,7 +31,6 @@ public class Lever : MonoBehaviour
         if (leverBox.CompareTag("Player"))
         {
             canInteract = false;
-            Debug.Log("Cannot toggle lever");
         }
     }
 }

@@ -56,14 +56,15 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\ground.cs" />
     <Compile Include="Assets\Scripts\Gravity\GravWedge.cs" />
     <Compile Include="Assets\Scripts\Level\Turret.cs" />
+    <Compile Include="Assets\Scripts\Level\Lever.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Level\MovingPlatforms.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Level\Bullet.cs" />
     <Compile Include="Assets\Scripts\Level\MovingBarrier.cs" />
-    <Compile Include="Assets\ground.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

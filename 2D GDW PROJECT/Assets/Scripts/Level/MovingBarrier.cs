@@ -21,7 +21,6 @@ public class MovingBarrier : MonoBehaviour
         isVertical = GameObject.Find("Player").GetComponent<PlayerController>().GetIsVertical();
         isRight = GameObject.Find("Player").GetComponent<PlayerController>().GetIsRight();
 
-
         if (isVertical && isRight)
         {
             transform.RotateAround(customPivotRight.transform.position, -Vector3.forward, rotationSpeed * Time.deltaTime);
@@ -31,7 +30,5 @@ public class MovingBarrier : MonoBehaviour
         {
             transform.RotateAround(customPivotLeft.transform.position, Vector3.forward, rotationSpeed * Time.deltaTime);
         }
-
-        //caavin gole made this no public cooler
     }
 }

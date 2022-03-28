@@ -53,7 +53,6 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("pressed shift");
             Dash();
-           
         }
     }
 
@@ -200,9 +199,11 @@ public class PlayerController : MonoBehaviour
                 transform.eulerAngles = new Vector3(0, 0, -90f);
             }
         }
+
         facingRight = !facingRight;
         top = !top;
     }
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
         isGrounded = true;
@@ -214,6 +215,7 @@ public class PlayerController : MonoBehaviour
             transform.parent = collision.gameObject.transform;
         }
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("platform"))
@@ -221,6 +223,7 @@ public class PlayerController : MonoBehaviour
             transform.parent = null;
         }
     }
+
     public bool GetIsGrounded()
     {
         return isGrounded;
@@ -248,13 +251,12 @@ public class PlayerController : MonoBehaviour
 
     public void Dash()
     {
-
         Debug.Log("dash");
         currentPos += movementDir * dashForce;
         transform.position = currentPos;
         ResetTimer();
-
     }
+
     // checks if the delay is up or not
     public bool CanDash()
     {
@@ -275,6 +277,7 @@ public class PlayerController : MonoBehaviour
             return false;
         }
     }
+
     // you know what this does 
     public void ResetTimer()
     {
@@ -292,7 +295,6 @@ public class PlayerController : MonoBehaviour
             return Physics2D.Raycast(rb.transform.position, Vector2.right * -1, dashForce, ObjectLayer).collider == null;
         }
     }
-  
 
     private void updateScammerValue()
     {

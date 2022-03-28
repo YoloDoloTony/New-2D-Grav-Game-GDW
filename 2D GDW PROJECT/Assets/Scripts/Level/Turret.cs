@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     public float detectRange;
 
     public Transform player;
@@ -32,11 +30,6 @@ public class Turret : MonoBehaviour
     private void Awake()
     {
         SpriteRenderer lightColor = light.GetComponent<SpriteRenderer>();
-    }
-
-    void Start()
-    {
-
     }
 
     // Update is called once per frame
@@ -78,10 +71,9 @@ public class Turret : MonoBehaviour
                     Shoot();
                 }
             }
-
-
         }
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, detectRange);
@@ -94,7 +86,4 @@ public class Turret : MonoBehaviour
         bulletPrefab.GetComponent<Rigidbody2D>().AddForce(direction * bulletSpeed);
          
     }
-
-
-
 }

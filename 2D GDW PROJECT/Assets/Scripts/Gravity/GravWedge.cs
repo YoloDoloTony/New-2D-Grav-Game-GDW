@@ -5,7 +5,8 @@ using UnityEngine;
 public class GravWedge : MonoBehaviour
 {
     [SerializeField] Camera mainCamera;
-    [SerializeField] bool gravChangeRight;
+    [SerializeField] bool changeRight;
+    [SerializeField] bool changeToRoof;
 
     bool isVertical;
     bool isGrounded;
@@ -17,16 +18,25 @@ public class GravWedge : MonoBehaviour
         isGrounded = collision.gameObject.GetComponent<PlayerController>().GetIsGrounded();
 
         //Switch to right wall
-        if (isGrounded && gravChangeRight && !isVertical && canSwap)
+        if (isGrounded && changeRight && !isVertical && canSwap)
         {
             canSwap = false;
 
             //Change gravity direction
             Physics2D.gravity = new Vector2(9.81f, 0f);
 
-            //Rotate player and camera
-            collision.gameObject.transform.eulerAngles = new Vector3(0, 0, 90f);
+            //Rotate camera
             mainCamera.transform.eulerAngles = new Vector3(0, 0, 90f);
+
+            //Rotate player
+            if (collision.gameObject.transform.rotation.z == 0)
+            {
+                collision.gameObject.transform.eulerAngles = new Vector3(0, 0, 90f);
+            }
+            else
+            {
+                collision.gameObject.transform.eulerAngles = new Vector3(0, 0, -90f);
+            }
 
             //Set bools for player movement
             collision.gameObject.GetComponent<PlayerController>().SetIsVertical(true);
@@ -34,17 +44,27 @@ public class GravWedge : MonoBehaviour
 
             StartCoroutine(CanSwapTimer());
         }
+
         //Switch to left wall
-        if (isGrounded && !gravChangeRight && !isVertical && canSwap)
+        if (isGrounded && !changeRight && !isVertical && canSwap)
         {
             canSwap = false;
 
             //Change gravity direction
             Physics2D.gravity = new Vector2(-9.81f, 0f);
 
-            //Rotate player and camera
-            collision.gameObject.transform.eulerAngles = new Vector3(0, 0, -90f);
-            mainCamera.transform.eulerAngles = new Vector3(0, 0, -90f);
+            //Rotate camera
+            mainCamera.transform.eulerAngles = new Vector3(0, 0, 90);
+
+            //Rotate player
+            if (collision.gameObject.transform.rotation.z == 0)
+            {
+                collision.gameObject.transform.eulerAngles = new Vector3(0, 0, -90);
+            }
+            else
+            {
+                collision.gameObject.transform.eulerAngles = new Vector3(0, 0, 90);
+            }
 
             //Set bools for player movement
             collision.gameObject.GetComponent<PlayerController>().SetIsVertical(true);
@@ -52,6 +72,7 @@ public class GravWedge : MonoBehaviour
 
             StartCoroutine(CanSwapTimer());
         }
+
         //Switch to ground
         if (isGrounded && isVertical && canSwap)
         {
@@ -60,9 +81,18 @@ public class GravWedge : MonoBehaviour
             //Change gravity direction
             Physics2D.gravity = new Vector2(0f, -9.81f);
 
-            //Rotate player and camera
-            collision.gameObject.transform.eulerAngles = Vector3.zero;
+            //Rotate camera
             mainCamera.transform.eulerAngles = Vector3.zero;
+
+            //Rotate player
+            if (changeToRoof)
+            {
+                collision.gameObject.transform.eulerAngles = new Vector3(0, 0, 180);
+            }
+            else
+            {
+                collision.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
+            }
 
             //Set bools for player movement
             collision.gameObject.GetComponent<PlayerController>().SetIsVertical(false);
@@ -76,8 +106,6 @@ public class GravWedge : MonoBehaviour
     IEnumerator CanSwapTimer()
     {
         yield return new WaitForSeconds(1);
-
         canSwap = true;
-        Debug.Log("Hi reyan");
     }
 }

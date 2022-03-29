@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
         //Vertical (left) player movement
         if (isVertical && !isRight)
         {
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.D))
             {
                 movementDir += new Vector2(0.0f, 1.0f);
 
@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
                     FaceDirection();
                 }
             }
-            else if (Input.GetKey(KeyCode.D))
+            else if (Input.GetKey(KeyCode.A))
             {
                 movementDir += new Vector2(0.0f, -1.0f);
 
@@ -143,16 +143,18 @@ public class PlayerController : MonoBehaviour
         }
         rb.velocity = movementDir * (playerSpeed);
     }
+
     //Switches what way player is facing
-    private void FaceDirection()
+    public void FaceDirection()
     {
         facingRight = !facingRight;
         Vector3 Scaler = transform.localScale;
         Scaler.x *= -1;
         transform.localScale = Scaler;
     }
+
     //180 degree Gravity Switch
-    private void SwitchGravity()
+    void SwitchGravity()
     {
         rb.gravityScale *= -1;
         Flip();
@@ -278,7 +280,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // you know what this does 
+    //Reset delay timer 
     public void ResetTimer()
     {
         delayTime += Time.realtimeSinceStartup + save;
